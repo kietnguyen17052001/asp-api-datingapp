@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "yb0pzExPZx5ytvv67tPblYQQgki1O8oBkxXxV1SRVNM=",
+  "Source": "dating-app.api",
+  "BasePath": "_content/dating-app.api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
