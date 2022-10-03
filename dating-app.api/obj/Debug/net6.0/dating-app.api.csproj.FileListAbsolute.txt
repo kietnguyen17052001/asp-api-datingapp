@@ -33,3 +33,11 @@ D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\
 D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\MySqlConnector.dll
 D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\kiet.nguyen-dang\programming\dot-net\web-api\dating-app.api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
