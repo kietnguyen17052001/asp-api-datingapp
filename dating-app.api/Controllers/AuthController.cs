@@ -67,7 +67,6 @@ namespace dating_app.api.Controllers
             return Ok(token);
         }
 
-        [Authorize]
         [HttpGet("get")]
         public IActionResult Get()
         {

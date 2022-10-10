@@ -1724,11 +1724,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\kiet.nguyen-dang\\programming\\dot-net\\web-api\\dating-app.api\\dating-app.api.csproj",
+      "projectUniqueName": "D:\\kiet.nguyen-dang\\programming\\dot-net\\asp-api-datingapp\\dating-app.api\\dating-app.api.csproj",
       "projectName": "dating-app.api",
-      "projectPath": "D:\\kiet.nguyen-dang\\programming\\dot-net\\web-api\\dating-app.api\\dating-app.api.csproj",
+      "projectPath": "D:\\kiet.nguyen-dang\\programming\\dot-net\\asp-api-datingapp\\dating-app.api\\dating-app.api.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\kiet.nguyen-dang\\programming\\dot-net\\web-api\\dating-app.api\\obj\\",
+      "outputPath": "D:\\kiet.nguyen-dang\\programming\\dot-net\\asp-api-datingapp\\dating-app.api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
