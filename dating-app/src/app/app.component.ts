@@ -1,3 +1,4 @@
+import { AccountService } from './_services/account.service';
 import { HttpClient } from '@angular/common/http';
 import { AppUser } from './models/app-user';
 import { Component, OnInit } from '@angular/core';
@@ -13,14 +14,16 @@ export class AppComponent implements OnInit{
   name = "NDK";
   users: AppUser[] = [];
 
-  constructor(private httpClient: HttpClient){
+  constructor(private httpClient: HttpClient, private accountService :AccountService){
 
   }
 
   ngOnInit(): void {
     this.httpClient.get<AppUser[]>("https://localhost:7031/api/Auth/get")
     .subscribe(res => this.users = res,
-      error => console.log(error))  
+      error => console.log(error))
+
+    this.accountService.reLogin()
   }
-  
+
 }
