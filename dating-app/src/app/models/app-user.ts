@@ -3,3 +3,13 @@ export class AppUser {
     username: string = "";
     email: string = "";
 }
+
+export class UserToken {
+    username: string = "";
+    token: string = "";
+}
+
+export class AuthUser {
+    username: string = "";
+    password: string = "";
+}

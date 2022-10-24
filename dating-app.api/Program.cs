@@ -14,7 +14,7 @@ services.AddControllers();
 
 services.AddCors(o =>
     o.AddPolicy("CorsPolicy", builder =>
-        builder.WithOrigins("http://localhost:53651")
+        builder.WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()));
 

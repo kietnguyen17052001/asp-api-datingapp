@@ -7,14 +7,33 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">{{ authUser.username }}</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="text" placeholder="Username" />
-                <input class="form-control me-2" type="password" placeholder="Password" />
-                <button class="btn btn-outline-success" type="submit">Login</button>
+            <form class="d-flex" role="search" *ngIf="!(accountService.currentUser$ | async)">
+                <input class="form-control me-2" type="text" placeholder="Username" [(ngModel)]="authUser.username" name="{{ authUser.username }}" />
+                <input class="form-control me-2" type="password" placeholder="Password" [(ngModel)]="authUser.password" name="{{ authUser.password }}" />
+                <button class="btn btn-outline-success" type="button" (click)="login()">
+          Login
+        </button>
             </form>
-        </div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="accountService.currentUser$ | async">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Hello {{ (accountService.currentUser$ | async)?.username }} dep
+            trai</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            (click)="accountService.logout()"
+            *ngIf="accountService.currentUser$ | async"
+            class="nav-link"
+            aria-current="page"
+            href="#"
+            >Log out</a
+          >
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
