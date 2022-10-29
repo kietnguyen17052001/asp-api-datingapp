@@ -84,3 +84,6 @@ D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\obj\Deb
 D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\obj\Debug\net6.0\dating-app.api.pdb
 D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\obj\Debug\net6.0\dating-app.api.genruntimeconfig.cache
 D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\obj\Debug\net6.0\ref\dating-app.api.dll
+D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\bin\Debug\net6.0\Data\Seed\User.json
+D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\bin\Debug\net6.0\AutoMapper.dll
+D:\kiet.nguyen-dang\programming\dot-net\asp-api-datingapp\dating-app.api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

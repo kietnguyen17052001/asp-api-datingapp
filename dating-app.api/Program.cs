@@ -4,6 +4,8 @@ using dating_app.api.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using dating_app.api.Data.Seed;
+using dating_app.api.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,8 @@ services.AddDbContext<DataContext>(
 );
 
 services.AddScoped<ITokenService, TokenService>();
+services.AddScoped<IMemberService, MemberService>();
+services.AddAutoMapper(typeof(UserMapperProfile).Assembly);
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -48,7 +52,19 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
-
+using var scope = app.Services.CreateScope();
+var serviceProvider = scope.ServiceProvider;
+try
+{
+    var context = serviceProvider.GetRequiredService<DataContext>();
+    context.Database.Migrate();
+    Seed.SeedUsers(context);
+}
+catch (Exception ex)
+{
+    var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "Migration failed");
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

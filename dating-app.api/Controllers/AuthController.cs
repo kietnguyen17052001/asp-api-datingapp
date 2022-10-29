@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace dating_app.api.Controllers
 {
+    [Route("api/auth")]
     public class AuthController : BaseController
     {
         private readonly DataContext dataContext;
@@ -46,6 +47,7 @@ namespace dating_app.api.Controllers
                 return Ok(token);
             }
         }
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthUserDto authUserDto)
         {
@@ -67,7 +69,6 @@ namespace dating_app.api.Controllers
             var token = tokenService.createToken(authUserDto.username);
             return Ok(token);
         }
-
         [HttpGet("get")]
         public IActionResult Get()
         {
