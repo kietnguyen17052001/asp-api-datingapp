@@ -43,11 +43,7 @@ namespace dating_app.api.Controllers
                 dataContext.users.Add(newUser);
                 dataContext.SaveChanges();
                 var token = tokenService.createToken(authUserDto.username);
-                return Ok(new UserTokenDto
-                {
-                    username = newUser.username,
-                    token = token
-                });
+                return Ok(token);
             }
         }
         [HttpPost("login")]
@@ -69,11 +65,7 @@ namespace dating_app.api.Controllers
                 }
             }
             var token = tokenService.createToken(authUserDto.username);
-            return Ok(new UserTokenDto
-            {
-                username = currentUser.username,
-                token = token
-            });
+            return Ok(token);
         }
 
         [HttpGet("get")]

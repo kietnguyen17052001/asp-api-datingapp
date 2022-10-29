@@ -9,20 +9,26 @@ import { BehaviorSubject, map, Observable, pipe } from 'rxjs';
 export class AccountService {
   baseUrl: string = "https://localhost:7031/api/Auth/";
   httpOption = {
-    headers: new HttpHeaders({
+
+  };
+  headers = new HttpHeaders({
       "Content-Type": "application/json"
     })
-  };
-
   private currentUser = new BehaviorSubject<UserToken | null>(null);
   currentUser$ = this.currentUser.asObservable();
   constructor(private httpClient:HttpClient) {}
   login (authUser: AuthUser) : Observable<any>{
-    return this.httpClient.post<any>(`${this.baseUrl}login`, authUser, this.httpOption)
+    return this.httpClient.post(`${this.baseUrl}login`, authUser, {
+      responseType: 'text',
+      headers: this.headers
+    })
     .pipe(
-      map((response: UserToken) => {
-        this.currentUser.next(response)
-        localStorage.setItem('userToken', JSON.stringify(response))
+      map((token) => {
+        if (token) {
+          const userToken: UserToken = {username: authUser.username, token: token}
+          this.currentUser.next(userToken)
+          localStorage.setItem('userToken', JSON.stringify(userToken))
+        }
       })
     )
   }
