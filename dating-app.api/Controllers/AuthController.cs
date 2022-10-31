@@ -13,8 +13,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace dating_app.api.Controllers
 {
+    [ApiController]
     [Route("api/auth")]
-    public class AuthController : BaseController
+    public class AuthController : ControllerBase
     {
         private readonly DataContext dataContext;
         private readonly ITokenService tokenService;
@@ -23,6 +24,7 @@ namespace dating_app.api.Controllers
             this.dataContext = dataContext;
             this.tokenService = tokenService;
         }
+
         [HttpPost("register")]
         public IActionResult Register([FromBody] AuthUserDto authUserDto)
         {
@@ -47,7 +49,7 @@ namespace dating_app.api.Controllers
                 return Ok(token);
             }
         }
-        [AllowAnonymous]
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthUserDto authUserDto)
         {
@@ -68,11 +70,6 @@ namespace dating_app.api.Controllers
             }
             var token = tokenService.createToken(authUserDto.username);
             return Ok(token);
-        }
-        [HttpGet("get")]
-        public IActionResult Get()
-        {
-            return Ok(dataContext.users.ToList());
         }
     }
 }

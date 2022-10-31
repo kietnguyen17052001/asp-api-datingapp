@@ -1,7 +1,9 @@
 import { AccountService } from './_services/account.service';
 import { HttpClient } from '@angular/common/http';
-import { AppUser } from './models/app-user';
+import { AppUser} from './models/app-user';
 import { Component, OnInit } from '@angular/core';
+import { Member } from './models/member';
+import { MemberService } from './_services/member.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +14,13 @@ export class AppComponent implements OnInit{
 
   title = 'dating-app';
   name = "NDK";
-  users: AppUser[] = [];
+  users: Member[] = [];
 
-  constructor(private httpClient: HttpClient, private accountService :AccountService){
-
+  constructor(private httpClient: HttpClient,
+    public accountService :AccountService){
   }
 
   ngOnInit(): void {
-    this.httpClient.get<AppUser[]>("https://localhost:7031/api/Auth/get")
-    .subscribe(res => this.users = res,
-      error => console.log(error))
-
     this.accountService.reLogin()
   }
 

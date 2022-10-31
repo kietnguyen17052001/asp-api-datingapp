@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dating_app.api.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class BaseController : ControllerBase
