@@ -13,3 +13,15 @@ export class AuthUser {
     username: string = "";
     password: string = "";
 }
+
+export class RegisterUser {
+  username: string = '';
+  password: string = '';
+  email: string = '';
+  dateOfBirth: Date = new Date();
+  gender: string = '';
+  city: string = '';
+  knownAs: string = '';
+  introduction: string = '';
+  avatar: string = '';
+}

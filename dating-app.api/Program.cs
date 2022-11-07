@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using dating_app.api.Data.Seed;
 using dating_app.api.Profiles;
+using dating_app.api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,8 @@ services.AddDbContext<DataContext>(
 
 services.AddScoped<ITokenService, TokenService>();
 services.AddScoped<IMemberService, MemberService>();
+services.AddScoped<IAuthService, AuthService>();
+services.AddScoped<IUserRepository, UserRepository>();
 services.AddAutoMapper(typeof(UserMapperProfile).Assembly);
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

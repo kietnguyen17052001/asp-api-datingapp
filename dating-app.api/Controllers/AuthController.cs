@@ -4,10 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dating_app.api.DTOs;
-using dating_app.api.Data;
-using System.Security.Cryptography;
-using dating_app.api.Data.Entity;
-using System.Text;
 using dating_app.api.Service;
 using Microsoft.AspNetCore.Authorization;
 
@@ -17,59 +13,36 @@ namespace dating_app.api.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly DataContext dataContext;
-        private readonly ITokenService tokenService;
-        public AuthController(DataContext dataContext, ITokenService tokenService)
+        private readonly IAuthService authService;
+        public AuthController(IAuthService _authService)
         {
-            this.dataContext = dataContext;
-            this.tokenService = tokenService;
+            authService = _authService;
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] AuthUserDto authUserDto)
+        public IActionResult Register([FromBody] RegisterUserDto registerUserDto)
         {
-            authUserDto.username = authUserDto.username.ToLower();
-            if (dataContext.users.Any(u => u.username == authUserDto.username))
+            try
             {
-                return BadRequest("username exists");
+                return Ok(authService.register(registerUserDto));
             }
-            else
+            catch (BadHttpRequestException ex)
             {
-                using var hmac = new HMACSHA512();
-                var passwordByte = Encoding.UTF8.GetBytes(authUserDto.password);
-                var newUser = new UserEntity
-                {
-                    username = authUserDto.username,
-                    passwordSalt = hmac.Key,
-                    passwordHash = hmac.ComputeHash(passwordByte)
-                };
-                dataContext.users.Add(newUser);
-                dataContext.SaveChanges();
-                var token = tokenService.createToken(authUserDto.username);
-                return Ok(token);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] AuthUserDto authUserDto)
         {
-            authUserDto.username = authUserDto.username.ToLower();
-            var currentUser = dataContext.users.FirstOrDefault(u => u.username == authUserDto.username);
-            if (currentUser == null)
+            try
             {
-                return Unauthorized("Username is invalid!");
+                return Ok(authService.login(authUserDto));
             }
-            using var hmac = new HMACSHA512(currentUser.passwordSalt);
-            var passwordByte = hmac.ComputeHash(Encoding.UTF8.GetBytes(authUserDto.password));
-            for (int i = 0; i < currentUser.passwordHash.Length; i++)
+            catch (UnauthorizedAccessException ex)
             {
-                if (currentUser.passwordHash[i] != passwordByte[i])
-                {
-                    return Unauthorized("Password is invalid!");
-                }
+                return Unauthorized(ex.Message);
             }
-            var token = tokenService.createToken(authUserDto.username);
-            return Ok(token);
         }
     }
 }

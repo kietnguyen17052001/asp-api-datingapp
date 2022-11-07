@@ -1,4 +1,4 @@
-import { UserToken, AuthUser } from './../models/app-user';
+import { UserToken, AuthUser, RegisterUser } from './../models/app-user';
 import { HttpClient, HttpHeaders, HttpParamsOptions } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, pipe } from 'rxjs';
@@ -46,5 +46,19 @@ export class AccountService {
     }
   }
 
-  register() {}
+  register(registerUser: RegisterUser) {
+    return this.httpClient.post(`${this.baseUrl}register`, registerUser, {
+      responseType: 'text',
+      headers: this.headers
+    })
+    .pipe(
+      map((token) => {
+        if (token) {
+          const userToken: UserToken = {username: registerUser.username, token: token}
+          this.currentUser.next(userToken)
+          localStorage.setItem('userToken', JSON.stringify(userToken))
+        }
+      })
+    )
+  }
 }
