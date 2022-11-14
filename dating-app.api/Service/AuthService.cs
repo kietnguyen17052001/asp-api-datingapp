@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using dating_app.api.Data.Entity;
 using dating_app.api.DTOs;
 using dating_app.api.Repository;
@@ -14,10 +15,12 @@ namespace dating_app.api.Service
     {
         private readonly IUserRepository userRepository;
         private readonly ITokenService tokenService;
-        public AuthService(IUserRepository _userRepository, ITokenService _tokenService)
+        private readonly IMapper mapper;
+        public AuthService(IUserRepository _userRepository, ITokenService _tokenService, IMapper _mapper)
         {
             userRepository = _userRepository;
             tokenService = _tokenService;
+            mapper = _mapper;
         }
 
         public string login(AuthUserDto authUserDto)
@@ -52,12 +55,9 @@ namespace dating_app.api.Service
             {
                 using var hmac = new HMACSHA512();
                 var passwordByte = Encoding.UTF8.GetBytes(registerUserDto.password);
-                var newUser = new UserEntity
-                {
-                    username = registerUserDto.username,
-                    passwordSalt = hmac.Key,
-                    passwordHash = hmac.ComputeHash(passwordByte)
-                };
+                var newUser = mapper.Map<RegisterUserDto, UserEntity>(registerUserDto);
+                newUser.passwordSalt = hmac.Key;
+                newUser.passwordHash = hmac.ComputeHash(passwordByte);
                 userRepository.createUser(newUser);
                 userRepository.isSaveChanges();
                 return tokenService.createToken(newUser.username);

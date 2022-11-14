@@ -12,6 +12,8 @@ namespace dating_app.api.Profiles
             .ForMember(dest => dest.age,
             options => options.MapFrom(src => src.dateOfBirth.HasValue
             ? src.dateOfBirth.Value.calculateAge() : 0));
+
+            CreateMap<RegisterUserDto, UserEntity>();
         }
     }
 }
